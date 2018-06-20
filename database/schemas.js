@@ -2,16 +2,17 @@ const Sequelize = require('sequelize');
 const { connection } = require('./index.js');
 
 const Question = connection.define( 'question', {
-    user_id: Sequelize.INTEGER,
-    restaurant_id: Sequelize.INTEGER,
-    text: Sequelize.STRING,
-    parent_id: Sequelize.INTEGER,
-    helpful: Sequelize.INTEGER
+  user_id: Sequelize.INTEGER,
+  restaurant_id: Sequelize.INTEGER,
+  text: Sequelize.STRING,
+  parent_id: Sequelize.INTEGER,
+  helpful: Sequelize.INTEGER,
+  answer: Sequelize.STRING
 });
 
 const User = connection.define( 'user', {
-    username: Sequelize.STRING,
-    imageUrl: Sequelize.STRING
+  username: Sequelize.STRING,
+  imageUrl: Sequelize.STRING,
 });
 
 
@@ -29,5 +30,3 @@ connection.sync()
       Question
   }
 
-
-  

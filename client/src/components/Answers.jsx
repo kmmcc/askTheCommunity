@@ -5,53 +5,53 @@ import styled from 'styled-components';
 
 
 class Answers extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            questionId: '',
-            user_id: '',
-            text: '',
-            imageUrl: '',
-            answers: [],
-            answerId: '',
-            time: '',
-            helpful: ''
-        }
+constructor(props) {
+    super(props);
+    this.state = {
+        questionId: '',
+        user_id: '',
+        text: '',
+        imageUrl: '',
+        answers: [],
+        answerId: '',
+        time: '',
+        helpful: ''
     }
+}
 
-    componentDidMount() {
-        this.getAnswers();
-    }
+componentDidMount() {
+    this.getAnswers();
+}
 
-    getPhoto() {
-        axios.get(`http://54.183.62.32:3000/api/getPhoto/${this.state.user_id}`)
-          .then(({data}) => {
-            //   console.log('Image data from user_id', data);
-              this.setState({
-                  imageUrl: data.imageUrl,
-              })
+getPhoto() {
+    axios.get(`http://54.183.62.32:3000/api/getPhoto/${this.state.user_id}`)
+        .then(({data}) => {
+        //   console.log('Image data from user_id', data);
+            this.setState({
+                imageUrl: data.imageUrl,
+            })
 
-          })
-          .catch(err => {
-              console.log('Error getting photo for user...', err);
-          })
-    }
+        })
+        .catch(err => {
+            console.log('Error getting photo for user...', err);
+        })
+}
 
-    getAnswers() {
-        axios.get(`http://54.183.62.32:3000/api/getAnswers/${this.props.id}`)
-          .then(({data}) => {
-              this.setState({
-                  answers: [...this.state.answers, data],
-                  text: data.text,
-                  user_id: data.user_id,
-                  time: data.createdAt,
-                  helpful: data.helpful
-              }, () => this.getPhoto());
-          })
-          .catch(err => {
-              console.log('Error getting answer back from the server', err);
-          })
-    }
+getAnswers() {
+    axios.get(`http://54.183.62.32:3000/api/getAnswers/${this.props.id}`)
+        .then(({data}) => {
+            this.setState({
+                answers: [...this.state.answers, data],
+                text: data.text,
+                user_id: data.user_id,
+                time: data.createdAt,
+                helpful: data.helpful
+            }, () => this.getPhoto());
+        })
+        .catch(err => {
+            console.log('Error getting answer back from the server', err);
+        })
+}
 
     conditionalRenderHelpful() {
         if (this.state.helpful === null) {
