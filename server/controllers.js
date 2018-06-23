@@ -33,6 +33,13 @@ module.exports = {
       }, {
         where: { id: req.body.id}
       })
+    },
+    delete: (req, res) => {
+      Question.destroy({
+        where: {
+          id: req.body.id
+        }
+      })
     }
   },
   questionsByID: {
@@ -48,13 +55,6 @@ module.exports = {
       })
       .catch(err => {
         res.send(err);
-      })
-    },
-    delete: (req, res) => {
-      Question.destroy({
-        where: {
-          restaurant_id: req.params.id
-        }
       })
     }
   },

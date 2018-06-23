@@ -1,4 +1,4 @@
-require(fs)
+const fs = require(fs)
 
 //write something that makes tons of random data
 //write it to a file
@@ -21,5 +21,3 @@ const questionGenerator = () => {
   return question;
 
 }
-
-fs.writeFile
