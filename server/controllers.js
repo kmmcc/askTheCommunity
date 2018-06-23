@@ -31,7 +31,9 @@ module.exports = {
         text: req.body.text,
         helpful: req.body.helpful
       }, {
-        where: { id: req.body.id}
+        where: { 
+          id: req.body.id
+        }
       })
     },
     delete: (req, res) => {

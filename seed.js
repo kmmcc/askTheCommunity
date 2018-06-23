@@ -7,9 +7,9 @@ const fs = require(fs)
 const questionGenerator = () => {
 
   const bank1 = ['Who', 'What', 'Where', 'When', 'Why']
-  const bank2 = ['does', 'will', `won\'t`, 'doesn\'t', 'isn\'t', 'creates', 'jumps', 'applies', 'flips', 'joins', 'adopts', 'runs', 'salts', 'pairs']
-  const bank3 = ['my friend', 'kick', 'the food', 'the seating', 'the kitchen', 'the cook', 'her friend', 'his friend', 'the mayor', 'bicycle', 'a spatula', 'the waiter', 'the silverware', 'a spork', 'the chicken', 'the salad']
-  const bank4 = ['now', 'pretend', 'cook', 'eat', 'sit', 'marinate', 'taste', 'create', 'spend', 'split', 'fry', 'dice', 'boil']
+  const bank2 = ['does', 'will', `won\'t`, 'doesn\'t', 'isn\'t', 'creates', 'jumps', 'applies', 'flips', 'joins', 'adopts', 'runs', 'salts', 'pairs', 'commences', 'tries', 'starts', 'spins', 'rolls', 'cleans']
+  const bank3 = ['my friend', 'kick', 'the food', 'the seating', 'the kitchen', 'the cook', 'the dog', 'the cat', 'the mayor', 'bicycle', 'a spatula', 'the waiter', 'the silverware', 'a spork', 'the chicken', 'the salad', 'the food', 'the light', 'a guest', 'customers', 'his friend', 'her friend', 'the bread', 'the sauce', 'the salt']
+  const bank4 = ['now', 'pretend', 'cook', 'sit', 'marinate', 'create', 'spend', 'split', 'fry', 'dice', 'boil', 'broil', 'simmer', 'bake', 'sit']
 
   let word1 = bank1[Math.floor(Math.random() * bank1.length)]
   let word2 = bank2[Math.floor(Math.random() * bank2.length)]
@@ -21,3 +21,8 @@ const questionGenerator = () => {
   return question;
 
 }
+
+//a function that invokes questionGenerator for each question
+//uses faker for restaurant ID and user name
+//
+//FORMAT (postgres) --- INSERT INTO questions  (user_id, restaurant_id, text, parent_id, helpful, "createdAt", "updatedAt") VALUES (1, 1, 'I am Batman?', null, 6, current_timestamp, current_timestamp);
