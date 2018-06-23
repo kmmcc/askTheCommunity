@@ -1,16 +1,18 @@
-const Sequelize = require('sequelize');
-
-const connection = new Sequelize('practice', 'postgres', 'postgres', {
-    host: process.env.DB_HOST || 'localhost',
-    dialect: 'postgres'
+const mysql = require('mysql');
+const connection = mysql.createConnection({
+  host: 'localhost',
+  user: 'askquestions',
+  password: 'askquestions',
+  database: 'askquestions'
 });
 
-connection.authenticate()
-.then(() => {
-    console.log('Successfully connected to the database')
-})
-.catch(err => {
-    console.log('Error connecting to the database...', err);
-})
+connection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+
+  console.log('connected as id ' + connection.threadId);
+});
 
 module.exports.connection = connection;
