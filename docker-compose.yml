@@ -1,24 +1,29 @@
-version: '2'
+version: '3'
 services:
   web:
-    image: yelp 
+    image: yelp
+    networks:
+      - welpNetwork 
     depends_on: 
-      - db
-    links:
       - db
     environment:
       DB_HOST: db
     ports:
       - 3000:3000
     # command: ["./wait-for-it.sh", "db:5432", "--", "npm", "start"] 
-    command: ["npm", "start"]
+    command:
+      bash -c 'npm run build && npm start'
   db:
     image: postgres
     volumes: 
-      - ./pgData:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
-      POSTGRES_PASSWORD: ''
+      POSTGRES_PASSWORD: postgres
       POSTGRES_USER: postgres
       POSTGRES_DB: practice
     ports:
-      - "3030:5432"
+      - "5432:5432"
+    networks:
+      - welpNetwork
+networks:
+  welpNetwork:

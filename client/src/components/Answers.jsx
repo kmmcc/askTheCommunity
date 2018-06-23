@@ -23,8 +23,9 @@ componentDidMount() {
     this.getAnswers();
 }
 
+//http://54.183.62.32:3000
 getPhoto() {
-    axios.get(`http://54.183.62.32:3000/api/getPhoto/${this.state.user_id}`)
+    axios.get(`/api/getPhoto/${this.state.user_id}`)
         .then(({data}) => {
         //   console.log('Image data from user_id', data);
             this.setState({
@@ -37,8 +38,9 @@ getPhoto() {
         })
 }
 
+//http://54.183.62.32:3000
 getAnswers() {
-    axios.get(`http://54.183.62.32:3000/api/getAnswers/${this.props.id}`)
+    axios.get(`/api/getAnswers/${this.props.id}`)
         .then(({data}) => {
             this.setState({
                 answers: [...this.state.answers, data],

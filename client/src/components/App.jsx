@@ -20,18 +20,18 @@ class App extends Component {
     componentDidMount() {
         this.onSubmitHandler();
     }
-
+//http://54.183.62.32:3000/api/questions/
     onSubmitHandler() {
-        axios.get(`http://54.183.62.32:3000/api/questions/${this.state.restaurantId}`)
-          .then(({data}) => {
-              this.setState({
-                  questions: data,
-                  passedQuestions: [data[0], data[1]]
-              });
-          })
-          .catch(err => {
-              console.log('Error getting data on client...', err);
-          })
+        axios.get(`/api/questions/${this.state.restaurantId}`)
+            .then(({data}) => {
+                this.setState({
+                    questions: data,
+                    passedQuestions: [data[0], data[1]]
+                });
+            })
+            .catch(err => {
+                console.log('Error getting data on client...', err);
+            })
     }
 
     // onChangeHandler(e) {
