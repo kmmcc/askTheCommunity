@@ -28,7 +28,7 @@ const createSQLQuestions = () => {
   let counter = 0
   const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/seed_data/questions.txt')
 
-  while (counter <= 50) {
+  while (counter <= 10) {
     //create user-id, restaurant_id, text, parent_id, helpful, createdat, updatedat
     let userId = Math.floor(Math.random() * 100)
     let restaurantId = Math.floor(Math.random() * 1000)
@@ -36,9 +36,12 @@ const createSQLQuestions = () => {
 
     let parentId = null
     let helpful = Math.floor(Math.random() * 100)
+    
+    let monthTime = 2628000000
+    let monthRandomizer = (monthTime * 3) * Math.random()
 
-    let createdat = new Date(Date.now()) + ''
-    let updatedat = new Date(Date.now()) + ''
+    let createdat = new Date(Date.now() + monthRandomizer) + ''
+    let updatedat = createdat
 
     let sqlStatement = `INSERT INTO questions (user_id, restaurant_id, text, parent_id, helpful, createdat, updatedat) VALUES (${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat}) \n`
 
