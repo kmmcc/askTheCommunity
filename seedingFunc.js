@@ -1,4 +1,5 @@
-const fs = require(fs)
+const fs = require('fs')
+const faker = require('faker');
 
 //write something that makes tons of random data
 //write it to a file
@@ -22,7 +23,40 @@ const questionGenerator = () => {
 
 }
 
+const createSQLQuestions = () => {
+  
+  let counter = 0
+  const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/seed_data/questions.txt')
+
+  while (counter <= 50) {
+    //create user-id, restaurant_id, text, parent_id, helpful, createdat, updatedat
+    let userId = Math.floor(Math.random() * 100)
+    let restaurantId = Math.floor(Math.random() * 1000)
+    let text = questionGenerator()
+
+    let parentId = null
+    let helpful = Math.floor(Math.random() * 100)
+
+    let createdat = new Date(Date.now()) + ''
+    let updatedat = new Date(Date.now()) + ''
+
+    let sqlStatement = `INSERT INTO questions (user_id, restaurant_id, text, parent_id, helpful, createdat, updatedat) VALUES (${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat}) \n`
+
+    stream.write(sqlStatement)
+
+    counter++
+    //use faker
+    //use questionGenerator
+    //fs write result to questions.txt
+  }
+
+}
+
+createSQLQuestions()
+
+
 //a function that invokes questionGenerator for each question
 //uses faker for restaurant ID and user name
+//serve lorem flickr pictures to s3
 //
-//FORMAT (postgres) --- INSERT INTO questions  (user_id, restaurant_id, text, parent_id, helpful, "createdAt", "updatedAt") VALUES (1, 1, 'I am Batman?', null, 6, current_timestamp, current_timestamp);
+//FORMAT (postgres w/ sequelize) --- INSERT INTO questions  (user_id, restaurant_id, text, parent_id, helpful, createdat, updatedat) VALUES (1, 1, 'I am Batman?', null, 6, current_timestamp, current_timestamp);

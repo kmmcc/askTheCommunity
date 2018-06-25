@@ -13,6 +13,7 @@ const Question = connection.define( 'question', {
 });
 
 const User = connection.define( 'user', {
+  //the auto sequelize,
   username: Sequelize.STRING,
   imageUrl: Sequelize.STRING
 });
