@@ -3,10 +3,10 @@ const faker = require('faker');
 
 const questionGenerator = () => {
 
-  const bank1 = ['Who', 'What', 'Where', 'When', 'Why']
+  const bank1 = ['How', 'What', 'Where', 'When', 'Why']
   const bank2 = ['does', 'will', `won\'t`, 'doesn\'t', 'isn\'t', 'creates', 'jumps', 'applies', 'flips', 'joins', 'adopts', 'runs', 'salts', 'pairs', 'commences', 'tries', 'starts', 'spins', 'rolls', 'cleans']
-  const bank3 = ['my friend', 'kick', 'the food', 'the seating', 'the kitchen', 'the cook', 'the dog', 'the cat', 'the mayor', 'bicycle', 'a spatula', 'the waiter', 'the silverware', 'a spork', 'the chicken', 'the salad', 'the food', 'the light', 'a guest', 'customers', 'his friend', 'her friend', 'the bread', 'the sauce', 'the salt']
-  const bank4 = ['now', 'pretend', 'cook', 'sit', 'marinate', 'create', 'spend', 'split', 'fry', 'dice', 'boil', 'broil', 'simmer', 'bake', 'sit']
+  const bank3 = ['the butter', 'the food', 'the seating', 'the kitchen', 'the water', 'the fish', 'a sandwich', 'the pasta', 'the drinks', 'a spatula', 'vegetables', 'the silverware', 'a spork', 'the chicken', 'the salad', 'the food', 'the light', 'the bowls', 'the falafel', 'the rice', 'the lettuce', 'the bread', 'the sauce', 'the salt']
+  const bank4 = ['taste', 'taste like', 'look', 'bake', 'marinate', 'simmer', 'smell', 'stir']
 
   let word1 = bank1[Math.floor(Math.random() * bank1.length)]
   let word2 = bank2[Math.floor(Math.random() * bank2.length)]
@@ -20,31 +20,38 @@ const questionGenerator = () => {
 }
 
 const createSQLQuestions = () => {
-  
+  let target = 10000000
   let counter = 0
   const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/seed_data/questions.txt')
 
-  while (counter <= 10) {
-    let userId = Math.floor(Math.random() * 100)
-    let restaurantId = Math.floor(Math.random() * 1000)
-    let text = questionGenerator()
+  const questioner = () => { 
+    let checker = true
+    while (counter <= target && checker === true) {
 
-    let parentId = null
-    let helpful = Math.floor(Math.random() * 100)
-    
-    let monthTime = 2628000000
-    let monthRandomizer = (monthTime * 3) * Math.random()
+      let userId = Math.floor(Math.random() * 100)
+      let restaurantId = Math.floor(Math.random() * 1000)
+      let text = questionGenerator()
 
-    let createdat = new Date(Date.now() + monthRandomizer) + ''
-    let updatedat = createdat
+      let parentId = null
+      let helpful = Math.floor(Math.random() * 100)
+      
+      let monthTime = 2628000000
+      let monthRandomizer = (monthTime * 3) * Math.random()
 
-    let sqlStatement = `INSERT INTO questions (user_id, restaurant_id, text, parent_id, helpful, createdat, updatedat) VALUES (${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat}) \n`
+      let createdat = new Date(Date.now() + monthRandomizer) + ''
+      let updatedat = createdat
 
-    stream.write(sqlStatement)
+      let sqlStatement = `${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat} \n`
 
-    counter++
+      checker = stream.write(sqlStatement)
+      
+      counter++
+    }
+      if (counter <= target) {
+        stream.once('drain', questioner)
+      }
   }
-
+  questioner()
 }
 
 createSQLQuestions()
