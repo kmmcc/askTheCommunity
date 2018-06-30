@@ -1,5 +1,4 @@
 const fs = require('fs')
-const faker = require('faker');
 
 const questionGenerator = () => {
 
@@ -19,20 +18,21 @@ const questionGenerator = () => {
 
 }
 
-const createSQLQuestions = () => {
+const createMongoQuestions = () => {
   let target = 10000000
   let counter = 0
-  const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/seed_data/questions.txt')
+  const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/db_mongo/seed_data/mongoquestions.csv')
+  let id = 1
 
   const questioner = () => { 
     let checker = true
     while (counter <= target && checker === true) {
 
-      let userId = Math.floor(Math.random() * 100)
-      let restaurantId = Math.floor(Math.random() * 1000)
+      let userId = Math.floor(Math.random() * 100000)
+      let restaurantId = Math.floor(Math.random() * 10000)
       let text = questionGenerator()
 
-      let parentId = null
+      let parentId = 0
       let helpful = Math.floor(Math.random() * 100)
       
       let monthTime = 2628000000
@@ -41,10 +41,11 @@ const createSQLQuestions = () => {
       let createdat = new Date(Date.now() + monthRandomizer) + ''
       let updatedat = createdat
 
-      let sqlStatement = `${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat} \n`
+      let sqlStatement = `${id}, ${userId}, ${restaurantId}, ${text}, ${parentId}, ${helpful}, ${createdat}, ${updatedat} \n`
 
       checker = stream.write(sqlStatement)
       
+      id++
       counter++
     }
       if (counter <= target) {
@@ -54,6 +55,4 @@ const createSQLQuestions = () => {
   questioner()
 }
 
-createSQLQuestions()
-
-//INSERT INTO questions  (user_id, restaurant_id, text, parent_id, helpful, createdat, updatedat) VALUES (1, 1, 'I am Batman?', null, 6, current_timestamp, current_timestamp);
+createMongoQuestions()

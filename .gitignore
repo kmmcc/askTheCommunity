@@ -4,5 +4,7 @@ coverage/
 aws-credentials.json
 pgdata
 seed_data
-questions.txt
-users.txt
+sqlquestions.txt
+sqlusers.txt
+mongoquestions.txt
+mongousers.txt

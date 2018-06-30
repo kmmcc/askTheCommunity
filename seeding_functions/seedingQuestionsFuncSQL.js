@@ -21,7 +21,7 @@ const questionGenerator = () => {
 const createSQLQuestions = () => {
   let target = 10000000
   let counter = 0
-  const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/seed_data/questions.txt')
+  const stream = fs.createWriteStream('/Users/kylemccarty/Desktop/gitTest/askTheCommunity/database/db_sql/seed_data/questions.txt')
 
   const questioner = () => { 
     let checker = true

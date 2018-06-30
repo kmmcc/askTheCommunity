@@ -1,18 +1,17 @@
 const express = require('express');
 const parser = require('body-parser');
 const path = require('path');
-const { User } = require('../database/schemas.js');
-const { Question } = require('../database/schemas.js');
+// const { User } = require('../database/db_sql/schemas.js');
+// const { Question } = require('../database/db_sql/schemas.js');
+const db = require('../database/db_mongo/index.js')
 const cors = require('cors');
 const PORT = process.env.PORT || 3000;
-// const corsOptions = {
-//     origin: 'http://18.144.13.22/',
-//     optionsSuccessStatus: 200
-//   };
+
+//Make connection to mongoDB
 
 const app = express();
 
-const routes = require('./routes.js');
+//const routes = require('./routes.js');
 
 app.use(parser.json());
 app.use(parser.urlencoded({extended: true}));
@@ -20,7 +19,7 @@ app.use(parser.urlencoded({extended: true}));
 app.use(express.static(path.resolve(__dirname, '../client/dist')));
 app.use(cors());
 
-app.use('/api', routes);
+//app.use('/api', routes);
 
 app.listen(PORT, () => {
     console.log('Listening on port:', PORT);
