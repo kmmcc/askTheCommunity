@@ -1,6 +1,6 @@
 
 const router = require('express').Router();
-const controller = require('./controllers.js');
+const controller = require('./mongoControllers.js');
 
 router.route('/questions')
 //.get(controller.app.get)
