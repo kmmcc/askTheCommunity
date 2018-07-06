@@ -9,23 +9,11 @@ router.route('/questions/:id')
 .put(controller.askQsController.put)
 router.route('/id/:id')
 .get(controller.individualQController.get)
-
-
-// router.route('/users')
-// .get(controller.todolist.fetch)
-// .post(controller.todolist.post)
-// router.route('/getPhotos')
-// .get(controller.todolist.fetch)
-// .post(controller.todolist.post)
-// .put(controller.todolist.delete);
-// .delete(controller.todolist.delete);
-
-// router.route('/getAnswers')
-// .get(controller.todolist.fetch)
-// .post(controller.todolist.post)
-// .put(controller.todolist.delete);
-// .delete(controller.todolist.delete);
-
-
+router.route('/users/:id')
+.post(controller.userControllerPost.post)
+router.route('/getPhoto/:id')
+.get(controller.userController.get)
+router.route('/getAnswers/:id')
+.get(controller.individualQController.get)
 
 module.exports.router = router;

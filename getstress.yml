@@ -1,0 +1,13 @@
+config:
+  target: 'http://localhost:3000/api'
+  phases:
+    - duration: 60
+      arrivalRate: 45
+      name: "DEFCON 4"
+
+scenarios:
+  - flow:
+    - loop: 
+      - get:
+          url: "/id/{{{$randomNumber(1, 100000)}}}"
+      count: 5

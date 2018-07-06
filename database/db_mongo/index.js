@@ -11,8 +11,7 @@ MongoClient.connect(url, function(err, client) {
     console.log('error in db connection', err)
   }
   console.log('Connected successfully to server from database')
-  //create tables here
-  //createCollection('name', callback(err, client))
+
   db = client.db(dbName)
 
   db.createCollection("question", function(err, client) {

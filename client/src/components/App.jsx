@@ -76,7 +76,7 @@ class App extends Component {
                     if (question !== undefined) {
                         return (
                             <div>
-                              <Question data={question.user_id} message={question.text} qid={question.id} />
+                              <Question data={question.user_id} message={question.question} qid={question.id} />
                             </div>
                         )
                     }

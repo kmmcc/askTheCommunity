@@ -27,9 +27,9 @@ componentDidMount() {
 getPhoto() {
     axios.get(`/api/getPhoto/${this.state.user_id}`)
         .then(({data}) => {
-        //   console.log('Image data from user_id', data);
+            console.log('Image data from user_id', data);
             this.setState({
-                imageUrl: data.imageUrl,
+                imageUrl: data[0].imageurl,
             })
 
         })
@@ -43,11 +43,11 @@ getAnswers() {
     axios.get(`/api/getAnswers/${this.props.id}`)
         .then(({data}) => {
             this.setState({
-                answers: [...this.state.answers, data],
-                text: data.text,
-                user_id: data.user_id,
-                time: data.createdAt,
-                helpful: data.helpful
+                answers: [...this.state.answers, data[0]],
+                text: data[0].question,
+                user_id: data[0].user_id,
+                time: data[0].createdat,
+                helpful: data[0].helpful
             }, () => this.getPhoto());
         })
         .catch(err => {
