@@ -27,7 +27,6 @@ componentDidMount() {
 getPhoto() {
     axios.get(`/api/getPhoto/${this.state.user_id}`)
         .then(({data}) => {
-            console.log('Image data from user_id', data);
             this.setState({
                 imageUrl: data[0].imageurl,
             })

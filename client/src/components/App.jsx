@@ -10,7 +10,7 @@ class App extends Component {
     constructor() {
         super();
         this.state = {
-          restaurantId: '2',
+          restaurantId: '5',
           passedQuestions: [],
           questions: []
         }
